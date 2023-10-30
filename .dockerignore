@@ -1,0 +1,25 @@
+### Exclude source code and development files
+__pycache__
+.vscode
+.github
+*.pyc
+*.log
+.git
+
+### dont include the localmount (fake runpod network volume) data 
+### when building image, as the volume is mounted on boot!
+volume/localmount
+
+### same with output folder when running locally, and no need when prod
+output
+
+### exclude examples, but not the test_input.json!
+examples/*
+!examples/test_input.json
+
+### exclude documentation and other non-essential runtime files
+LICENSE
+readme
+assets
+*.txt
+*.md

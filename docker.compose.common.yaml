@@ -1,0 +1,12 @@
+# 
+# Contains common comfyui service configuration
+# common = shared between both dev and production
+# 
+version: "3.8"
+
+services:
+  comfyui_common:
+    build: ./
+    image: dekita/runpod-worker-comfy:dev
+    container_name: dek-comfyui-worker
+

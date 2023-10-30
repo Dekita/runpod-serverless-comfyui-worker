@@ -1,0 +1,80 @@
+{
+    "input": {
+        "tobase64": false,
+        "workflow": {
+            "42": {
+                "inputs": {
+                    "base_ckpt_name": "wowXL_v10.safetensors",
+                    "base_clip_skip": -1,
+                    "refiner_ckpt_name": "sd_xl_refiner_1.0.safetensors",
+                    "refiner_clip_skip": -1,
+                    "positive_ascore": 6,
+                    "negative_ascore": 2,
+                    "vae_name": "sdxl_vae.safetensors",
+                    "positive": "Runpod Worker Thread",
+                    "negative": "Negative",
+                    "token_normalization": "none",
+                    "weight_interpretation": "comfy",
+                    "empty_latent_width": 1024,
+                    "empty_latent_height": 1024,
+                    "batch_size": 4,
+                    "lora_stack": ["44",0]
+                },
+                "class_type": "Eff. Loader SDXL"
+            },
+            "44": {
+                "inputs": {
+                    "input_mode": "simple",
+                    "lora_count": 3,
+                    "lora_name_1": "Angst-v1-2_SDXL.safetensors",
+                    "lora_wt_1": 1,
+                    "model_str_1": 1,
+                    "clip_str_1": 1,
+                    "lora_name_2": "ParchartXL-1.2.1.safetensors",
+                    "lora_wt_2": 0,
+                    "model_str_2": 1,
+                    "clip_str_2": 1,
+                    "lora_name_3": "None",
+                    "lora_wt_3": 1,
+                    "model_str_3": 1,
+                    "clip_str_3": 1
+                },
+                "class_type": "LoRA Stacker"
+            },
+            "45": {
+                "inputs": {
+                    "noise_seed": 1006521614344715,
+                    "steps": 24,
+                    "cfg": 7,
+                    "sampler_name": "euler_ancestral",
+                    "scheduler": "karras",
+                    "start_at_step": 0,
+                    "refine_at_step": -1,
+                    "preview_method": "auto",
+                    "vae_decode": "true",
+                    "sdxl_tuple": ["42",0],
+                    "latent_image": ["42",1],
+                    "optional_vae": ["42",2]
+                },
+                "class_type": "KSampler SDXL (Eff.)"
+            },
+            "259": {
+                "inputs": {
+                    "filename_prefix": "dek",
+                    "images": ["45",3]
+                },
+                "class_type": "SaveImage"
+            },
+            "260": {
+              "inputs": {
+                "model": "wd-v1-4-moat-tagger-v2",
+                "threshold": 0.35,
+                "character_threshold": 0.85,
+                "exclude_tags": "",
+                "image": ["45",3]
+              },
+              "class_type": "WD14Tagger|pysssss"
+            }
+        }
+    }
+}

@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  comfyui:
+    extends:
+      file: ./docker.compose.common.yaml
+      service: comfyui_common
+    ## for windows development (with wsl2):
+    volumes:
+      # mount output folder so you can see output files
+      - ./output:/comfyui/output
+      # mount 'volume/localmount' to act as a runpod volume clone
+      - ./volume/localmount:/runpod-volume
+    # include .env file since we are running locally
+    env_file: .env
+    # add container deployment restrictions and reservations
+    # allows us to set a limit on RAM usage and pass our nvidia gpu compute to container
+    deploy:
+      resources:
+        limits:
+          memory: 32G
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ['0']
+              capabilities: [compute, utility]
+

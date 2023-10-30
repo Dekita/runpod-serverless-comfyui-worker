@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  comfyui:
+    extends:
+      file: ./docker.compose.common.yaml
+      service: comfyui_common
+    # dont set env_file: here, use runpod env variables <3
+    # no need to include output volume mount here <3
+    # no need to mount volume as runpod will mount out network volume <3
+    ## for runpod deployment:
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all

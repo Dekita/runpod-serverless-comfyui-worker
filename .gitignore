@@ -1,0 +1,7 @@
+examples/*
+!examples/test_input.json
+volume/localmount/*
+custom/custom_nodes/*
+custom/models/*
+output/*
+.env
