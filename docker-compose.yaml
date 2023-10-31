@@ -1,0 +1,10 @@
+### 
+### File to copy the production compose files configuration. 
+### used automatically when building without a specified compose file.
+### 
+version: "3.8"
+services:
+  comfyui:
+    extends:
+      file: ./docker.compose.prod.yaml
+      service: comfyui

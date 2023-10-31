@@ -1,5 +1,7 @@
+### 
+### Contains windows development configuration for image
+### 
 version: "3.8"
-
 services:
   comfyui:
     extends:

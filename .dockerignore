@@ -18,8 +18,9 @@ examples/*
 !examples/test_input.json
 
 ### exclude documentation and other non-essential runtime files
+*.txt
+!*/requirements.txt
 LICENSE
 readme
 assets
-*.txt
 *.md

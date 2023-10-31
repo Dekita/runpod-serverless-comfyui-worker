@@ -1,5 +1,7 @@
+### 
+### Contains regular ubuntu configuration for production 
+### 
 version: "3.8"
-
 services:
   comfyui:
     extends:

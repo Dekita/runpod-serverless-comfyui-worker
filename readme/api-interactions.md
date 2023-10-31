@@ -1,4 +1,4 @@
-# Interacting with your endpoint API
+## Interacting with your endpoint API
 * In the [User Settings](https://www.runpod.io/console/serverless/user/settings) click on `API Keys` and then on the `API Key` button
 * Save the generated key somewhere, as you will not be able to see it again when you navigate away from the page
 * Use cURL or any other tool to access the API using the API key and your Endpoint-ID:
@@ -9,7 +9,7 @@ You can now create a new job for your serverless worker on runpod either syncron
 Use the /run or /runsync endpoint respectively. 
 The difference being that /run will return immediately and requires an additional api call to obtain job status upon completion. 
 
-## Request Format
+### Request Format
 The API expects JSON input in the following format:
 - input
   - tobase64: (Boolean) - will attempt to return base64 for generated images. Should only be used for testing
@@ -23,7 +23,7 @@ The API expects JSON input in the following format:
 }
 ```
 
-### Example Requests:
+#### Example Requests:
 With cURL
 ```bash
 curl -X POST \
@@ -55,7 +55,7 @@ const result = await RunPod.serverless.runsync("ENDPOINT_ID", {
 console.log(result)
 ```
 
-### Example request response:
+#### Example request response:
 Response
 ```json
 {
@@ -76,7 +76,7 @@ Response
 }
 ```
 
-### Health status
+#### Health status
 With cURL
 ```bash
 curl -H "Authorization: Bearer <api_key>" https://api.runpod.ai/v2/<endpoint_id>/health
@@ -88,7 +88,7 @@ import RunPod from 'dekita-runpod-js';
 console.log(await RunPod.serverless.health("ENDPOINT_ID"))
 ```
 
-### Async example
+#### Async example
 With [runpod.js](https://github.com/dekita/runpod.js)
 ```js
 // import runpod.js and workflow json
@@ -121,7 +121,7 @@ console.log(`final status update:`)
 console.log(result) // will contain final job output data
 ```
 
-# IMPORTANT NOTES
+## IMPORTANT NOTES
 If you are generating very large files, batch files, videos, etc. you should NOT return base64 as there is a payload limit on runpod requests. See [runpod-serverless-controls-and-limitations](https://docs.runpod.io/docs/controls-limitations) for more information on payload limits.
 
 At the time of writing this payload limits are 10MB for /run, and 20MB for /runsync. 

@@ -1,5 +1,4 @@
 ### 
-### Rename this to extra_model_paths.yaml and ComfyUI will load it on boot
 ### This is used to link your comfyui worker and runpod network volume storage 
 ### Configuring this, to match your network volume, will allow comfyui access
 ### to any models/loras/embeddings/custom_nodes/etc that are contained within 
