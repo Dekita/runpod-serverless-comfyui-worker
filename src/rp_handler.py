@@ -30,8 +30,7 @@ def handler(job):
     Returns:
         dict: A dictionary containing either an error message or a success status with generated images.
     """
-    job_input = job["input"]
-    job_output = {}
+    job_input = job["input"]  # input workflow
 
     # Validate inputs
     if job_input is None:
@@ -40,25 +39,29 @@ def handler(job):
     if job_input.get("workflow") is None:
         return utils.error(f"no 'workflow' property found on job data")
     
-    workflow = job_input.get("workflow")
-
-    # if workflow is a string then try convert to json
-    if isinstance(workflow, str):
-        try:
-            workflow = json.loads(workflow)
-        except json.JSONDecodeError:
-            return utils.error(f"Invalid JSON format in 'workflow' data")
-        
+    # if workflow is a string then validate will try convert to json
+    workflow = utils.validate_json(job_input.get("workflow"))
     # ensure workflow is valid JSON:
-    if not isinstance(workflow, dict):
-        return utils.error(f"'workflow' must be a JSON object or JSON-encoded string")
-    
+    if workflow is None:
+        return utils.error(f"'workflow' must be a valid JSON object or JSON-encoded string")
+
+    bucket_creds = None # default, since we want to use ENV variable instead (if set) :)
+
+    # validate that we can use 'aws' property 
+    custom_aws = utils.validate_json(job_input.get("tobucket"))
+    if custom_aws is not None:
+        utils.log(f"will attempt to use 'tobucket' credentials from job input for aws upload")
+        bucket_creds = custom_aws # set bucket creds for uploader
+        custom_aws = None # no need to store any longer
+
     # set callback for when comftroller processes incomming data
-    # update_progress = lambda data: runpod.serverless.progress_update(job, data)
-    update_progress = utils.log
+    update_progress = lambda data: runpod.serverless.progress_update(job, data)
+    # update_progress = utils.log
+
+    input_files = job_input.get("files", [])
 
     # outputs is equal to the completed comfyui job id history object
-    outputs = comftroller.run(workflow, ondata=update_progress)
+    outputs = comftroller.run(workflow, input_files, update_progress)
     if LOG_JOB_OUTPUTS:
         utils.log("---- RAW OUTPUTS ----")
         utils.log(outputs)
@@ -104,19 +107,20 @@ def handler(job):
 
     # attempt to upload the generated files to aws, 
     # send_to_aws returns (True, [file urls, ...]) or (False, [file paths, ...])
-    aws_uploaded, bucket_urls = uploader.send_to_aws(output_files, 'generations')
+    aws_uploaded, bucket_urls = uploader.send_to_aws(output_files, 'generations', bucket_creds)
 
     # define return object 
-    job_output["files"] = bucket_urls
-    job_output["datas"] = output_datas
+    job_result = {}
+    job_result["files"] = bucket_urls
+    job_result["datas"] = output_datas
 
     # convert generated image to base64 if not uploaded to aws and able
     # !NOTE: RUNPOD HAS PAYLOAD LIMITS!! CANNOT RETURN BASE64 FOR MULTIPLE LARGE FILES!!!
     if not aws_uploaded and utils.job_prop_to_bool(job_input, "tobase64"):
         for index, local_file in enumerate(bucket_urls):
-            job_output["files"][index] = utils.base64_encode(local_file)
+            job_result["files"][index] = utils.base64_encode(local_file)
 
-    return job_output
+    return job_result
 
 
 # Start the handler

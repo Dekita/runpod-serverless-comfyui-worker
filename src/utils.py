@@ -5,6 +5,7 @@ This module contains utility functions for file handling.
 
 # required imports for utility functions:
 import base64
+import json 
 
 # # import nudenet lib: (nudity detection)
 # # see: https://github.com/notAI-tech/NudeNet/tree/v3
@@ -49,6 +50,21 @@ def job_prop_to_bool(job_input, propname):
     if isinstance(value, str): return value.lower().strip() in true_strings
     return False
 
+
+
+
+def validate_json(maybe_json):
+    if isinstance(maybe_json, str):
+        try:
+            maybe_json = json.loads(maybe_json)
+        except json.JSONDecodeError:
+            return None
+        
+    # ensure workflow is valid JSON:
+    if not isinstance(maybe_json, dict):
+        return None
+    
+    return maybe_json
 
 
 

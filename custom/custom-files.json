@@ -1,10 +1,6 @@
 [
     {
-        "url": "https://github.com/pythongosssss/ComfyUI-WD14-Tagger.git",
-        "path": "custom_nodes/ComfyUI-WD14-Tagger"
-    },
-    {
-        "url": "",
-        "path": ""
+        "url": "todo",
+        "path": "todo"
     }
 ]

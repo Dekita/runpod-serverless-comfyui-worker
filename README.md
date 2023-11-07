@@ -5,10 +5,10 @@ A somewhat optimized, serverless [ComfyUI](https://github.com/comfyanonymous/Com
 
 
 ## Features 
+* Image based on [Ubuntu + NVIDIA CUDA](https://hub.docker.com/r/nvidia/cuda)
 * Launch [ComfyUI](https://github.com/comfyanonymous/ComfyUI) workflows on demand in seconds
 * Automatically upload generations to Amazon AWS *(requires [ENV Variables](/readme/aws-setup.md))
 * Get base64 data for generated images as job output *(when not aws upload && tobase64 flag set)
-* Image based on [Ubuntu + NVIDIA CUDA](https://hub.docker.com/r/nvidia/cuda)
 * Easily add custom models/loras/nodes/etc via a selection of methods
 * Sends progress updates so you can track/display them in your own ui
 * Support for runpod network volume mounted models/nodes

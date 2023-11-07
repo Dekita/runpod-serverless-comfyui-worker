@@ -121,13 +121,77 @@ This configuration will download the latest wd14-tagger node from github, along 
 ]
 ```
 
-#### AnimateDiff + VHS
+#### AnimateDiff + VHS (HUGE ~ 20+GB)
 This configuration will download a number of custom nodes from github alongside motion modules for animatediff. Animatediff is used to enable gif/mp4 video generations!! 
 ```json
 [
     {
-        "url": "TODO",
-        "path": "TODO"
+        "url": "https://github.com/Fannovel16/comfyui_controlnet_aux.git",
+        "path": "custom_nodes/comfyui_controlnet_aux"
+    },
+    {
+        "url": "https://github.com/Kosinkadink/ComfyUI-Advanced-ControlNet.git",
+        "path": "custom_nodes/ComfyUI-Advanced-ControlNet"
+    },
+    {
+        "url": "https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite.git",
+        "path": "custom_nodes/ComfyUI-VideoHelperSuite"
+    },
+    {
+        "url": "https://github.com/Kosinkadink/ComfyUI-AnimateDiff-Evolved.git",
+        "path": "custom_nodes/ComfyUI-AnimateDiff-Evolved"
+    },
+    {
+        "url": "https://huggingface.co/manshoety/AD_Stabilized_Motion/resolve/main/mm-Stabilized_high.pth",
+        "path": "custom_nodes/ComfyUI-AnimateDiff-Evolved/models/mm-Stabilized_high.pth"
+    },
+    {
+        "url": "https://huggingface.co/manshoety/AD_Stabilized_Motion/resolve/main/mm-Stabilized_mid.pth",
+        "path": "custom_nodes/ComfyUI-AnimateDiff-Evolved/models/mm-Stabilized_mid.pth"
+    },
+    {
+        "url": "https://huggingface.co/guoyww/animatediff/resolve/main/mm_sd_v15_v2.ckpt",
+        "path": "custom_nodes/ComfyUI-AnimateDiff-Evolved/models/mm_sd_v15_v2.ckpt"
+    },
+    {
+        "url": "https://huggingface.co/guoyww/animatediff/resolve/main/v2_lora_PanLeft.ckpt",
+        "path": "custom_nodes/ComfyUI-AnimateDiff-Evolved/motion_lora/v2_lora_PanLeft.ckpt"
+    },
+    {
+        "url": "https://huggingface.co/guoyww/animatediff/resolve/main/v2_lora_PanRight.ckpt",
+        "path": "custom_nodes/ComfyUI-AnimateDiff-Evolved/motion_lora/v2_lora_PanRight.ckpt"
+    },
+    {
+        "url": "https://huggingface.co/guoyww/animatediff/resolve/main/v2_lora_RollingAnticlockwise.ckpt",
+        "path": "custom_nodes/ComfyUI-AnimateDiff-Evolved/motion_lora/v2_lora_RollingAnticlockwise.ckpt"
+    },
+    {
+        "url": "https://huggingface.co/guoyww/animatediff/resolve/main/v2_lora_RollingClockwise.ckpt",
+        "path": "custom_nodes/ComfyUI-AnimateDiff-Evolved/motion_lora/v2_lora_RollingClockwise.ckpt"
+    },
+    {
+        "url": "https://huggingface.co/guoyww/animatediff/resolve/main/v2_lora_TiltDown.ckpt",
+        "path": "custom_nodes/ComfyUI-AnimateDiff-Evolved/motion_lora/v2_lora_TiltDown.ckpt"
+    },
+    {
+        "url": "https://huggingface.co/guoyww/animatediff/resolve/main/v2_lora_TiltUp.ckpt",
+        "path": "custom_nodes/ComfyUI-AnimateDiff-Evolved/motion_lora/v2_lora_TiltUp.ckpt"
+    },
+    {
+        "url": "https://huggingface.co/guoyww/animatediff/resolve/main/v2_lora_ZoomIn.ckpt",
+        "path": "custom_nodes/ComfyUI-AnimateDiff-Evolved/motion_lora/v2_lora_ZoomIn.ckpt"
+    },
+    {
+        "url": "https://huggingface.co/guoyww/animatediff/resolve/main/v2_lora_ZoomOut.ckpt",
+        "path": "custom_nodes/ComfyUI-AnimateDiff-Evolved/motion_lora/v2_lora_ZoomOut.ckpt"
+    },
+    {
+        "url": "https://huggingface.co/CiaraRowles/TemporalDiff/resolve/main/temporaldiff-v1-animatediff.safetensors",
+        "path": "custom_nodes/ComfyUI-AnimateDiff-Evolved/motion_lora/temporaldiff-v1-animatediff.safetensors"
+    },
+    {
+        "url": "https://huggingface.co/hotshotco/Hotshot-XL/resolve/main/hsxl_temporal_layers.f16.safetensors",
+        "path": "custom_nodes/ComfyUI-AnimateDiff-Evolved/motion_lora/hsxl_temporal_layers.f16.safetensors"
     }
 ]
 ```

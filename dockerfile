@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y \
     python3.10 \
     wget \
     git \
-    ### Install libs used for exporting mp4, for nodes like animatediff. can be removed if not required.
+### Install libs used for exporting mp4, for nodes like animatediff. can be removed if not required.
     ffmpeg \
     libpng-dev \
     libjpeg-dev \
@@ -31,18 +31,19 @@ RUN git clone https://github.com/comfyanonymous/ComfyUI.git /comfyui
 ### Change working directory to ComfyUI
 WORKDIR /comfyui
 
-### Add /custom folder - this includes the installer script and any manually added custom nodes/models
-ADD custom/ ./
-
 ### set comfyui to specific commit id (useful if they update and introduce bugs...)
 # RUN git checkout 723847f6b3d5da21e5d712bc0139fb7197ba60a4
 
 ### Install ComfyUI dependencies
 RUN pip3 install --no-cache-dir torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121 \
     && pip3 install --no-cache-dir xformers==0.0.21 \
-    && pip3 install -r requirements.txt \
+    && pip3 install -r requirements.txt 
+
+### Add /custom folder - this includes the installer script and any manually added custom nodes/models
+ADD custom/ volume/extra_model_paths.yaml ./
+
 ### install each of the custom models/nodes etc within custom-files.json
-    && python3 custom-file-installer.py 
+RUN python3 custom-file-installer.py 
 
 ### Check for custom nodes 'requirements.txt' files and then run install
 RUN for dir in /comfyui/custom_nodes/*/; do \
@@ -54,8 +55,8 @@ done
 ### Go back to the root
 WORKDIR /
 
-### Add the src directory, example input, and extra volume model paths
-ADD src/ examples/test_input.json volume/extra_model_paths.yaml ./ 
+### Add the src directory and example input
+ADD src/ examples/test_input.json ./ 
 
 ### Install each of the defined requirements then make start.sh file executable
 RUN pip3 install --no-cache-dir -r requirements.txt && chmod +x /start.sh
@@ -65,5 +66,4 @@ RUN pip3 cache purge
 
 ### Start the container
 CMD /start.sh
-
 # because 69 :*

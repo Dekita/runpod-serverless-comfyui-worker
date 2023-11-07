@@ -1,5 +1,6 @@
 {
     "input": {
+        "files": [],
         "tobase64": false,
         "workflow": {
             "42": {
@@ -26,11 +27,11 @@
                 "inputs": {
                     "input_mode": "simple",
                     "lora_count": 3,
-                    "lora_name_1": "Angst-v1-2_SDXL.safetensors",
+                    "lora_name_1": "None",
                     "lora_wt_1": 1,
                     "model_str_1": 1,
                     "clip_str_1": 1,
-                    "lora_name_2": "ParchartXL-1.2.1.safetensors",
+                    "lora_name_2": "None",
                     "lora_wt_2": 0,
                     "model_str_2": 1,
                     "clip_str_2": 1,

@@ -13,6 +13,8 @@ services:
       - ./output:/comfyui/output
       # mount 'volume/localmount' to act as a runpod volume clone
       - ./volume/localmount:/runpod-volume
+      # mount test_input.json so we dont need to rebuild if just changing that
+      - ./examples/test_input.json:/test_input.json      
     # include .env file since we are running locally
     env_file: .env
     # add container deployment restrictions and reservations

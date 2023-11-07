@@ -1,22 +1,42 @@
 ### 
+### 
 ### This is used to link your comfyui worker and runpod network volume storage 
 ### Configuring this, to match your network volume, will allow comfyui access
 ### to any models/loras/embeddings/custom_nodes/etc that are contained within 
-### NOTE: your base path should be either an existing comfy install or a 
-### central folder where you store all of your models, loras, etc.
 ### 
-
+### 
+### See https://github.com/comfyanonymous/ComfyUI/blob/master/folder_paths.py
+### OR https://github.com/comfyanonymous/ComfyUI/blob/master/extra_model_paths.yaml.example
+### for latest usable extra model path names
+### 
+###  
+### NOTE: MAKE SURE THE PATH EXISTS IN YOUR VOLUME BEFORE YOU TRY TO MOUNT IT!
+### 
+### NOTE: For custom_nodes, make sure that any required modules are preinstalled
+### in the image or your custom nodes will fail to mount properly!!
+### See your desired custom node repo's requirements.txt file for details. 
+### If there is no requirements.txt file, there are no additional modules 
+### required for the nodes that specific repo's custom nodes. 
+### 
+### 
 comfyui:
-    #base_path: /runpod-volume/
-    custom_nodes: runpod-volume/custom_nodes/
-    checkpoints: runpod-volume/models/checkpoints/
-    clip: runpod-volume/models/clip/
-    clip_vision: runpod-volume/models/clip_vision/
-    configs: runpod-volume/models/configs/
-    controlnet: runpod-volume/models/controlnet/
-    embeddings: runpod-volume/models/embeddings/
-    loras: runpod-volume/models/loras/
-    upscale_models: runpod-volume/models/upscale_models/
-    vae: runpod-volume/models/vae/
-    vae_approx: runpod-volume/models/vae_approx/
-    gligen: runpod-volume/models/gligen
+    # base_path: /runpod-volume/ 
+
+    # custom_nodes: /runpod-volume/custom_nodes/
+    upscale_models: /runpod-volume/models/upscale_models/
+    checkpoints: /runpod-volume/models/checkpoints/
+    embeddings: /runpod-volume/models/embeddings/
+    controlnet: /runpod-volume/models/controlnet/
+    configs: /runpod-volume/models/configs/
+    loras: /runpod-volume/models/loras/
+    vae: /runpod-volume/models/vae/
+
+    # unet: /runpod-volume/models/unet/
+    # clip: /runpod-volume/models/clip/
+    # clip_vision: /runpod-volume/models/clip_vision/
+    # style_models: /runpod-volume/models/style_models/
+    # hypernetworks: /runpod-volume/models/gligen
+    # classifiers: /runpod-volume/models/gligen
+    # vae_approx: /runpod-volume/models/vae_approx/
+    # diffusers: /runpod-volume/models/diffusers/
+    # gligen: /runpod-volume/models/gligen

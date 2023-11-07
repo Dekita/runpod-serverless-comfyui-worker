@@ -11,14 +11,32 @@ The difference being that /run will return immediately and requires an additiona
 
 ### Request Format
 The API expects JSON input in the following format:
-- input
-  - tobase64: (Boolean) - will attempt to return base64 for generated images. Should only be used for testing
-  - workflow: {JSON} - the workflow obtained by clicking `Save (API Format)` in comfy ui
-```
+* webhook: {String} - a url of your own that will receive job output data on completion
+* policy: {"executiontimeout": 5000}: sets the max time a worker can run (see https://docs.runpod.io/docs/worker-functions)
+* input:
+  * workflow: {JSON} - the workflow obtained by clicking `Save (API Format)` in comfy ui
+  * tobase64: (Boolean) - will attempt to return base64 for generated images. Should only be used for testing
+  * tobucket: {JSON} - json object containing `endpointUrl`, `accessId`, and `accessSecret` for uploading to aws s3 bucket - overrides ENV setting. 
+
+```json
 {
+    "webhook": "https://URL.TO.YOUR.WEBHOOK",
+    "policy": {"executiontimeout": 5000},
     "input": {
+        "workflow": {},
         "tobase64": false,
-        "workflow": {}
+        "tobucket": { 
+            "accessId": "AKIAIOSFODNN7EXAMPLE",
+            "accessSecret": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+            "endpointUrl": "https://bucket.s3.region.amazonaws.com`",
+            "bucketName": "bucket-subfolder-to-store-generations"
+        }
+    },
+    "s3Config": {
+        "accessId": "key_id_or_username",
+        "accessSecret": "key_secret_or_password",
+        "bucketName": "storage_location_name",
+        "endpointUrl": "storage_location_address"
     }
 }
 ```
@@ -44,8 +62,6 @@ import WORKFLOW from './examples/test_input.json';
 // this example runs syncronously though, so wont return
 // until the job is complete. use async for long running jobs.
 const result = await RunPod.serverless.runsync("ENDPOINT_ID", {
-    // webhook: "https://URL.TO.YOUR.WEBHOOK"
-    // policy: {executiontimeout: 5000},
     input: {
         tobase64: false,
         workflow: WORKFLOW, 

@@ -6,5 +6,5 @@ version: "3.8"
 services:
   comfyui_common:
     build: ./
-    image: dekita/runpod-worker-comfy:dev
+    image: dekita/runpod-worker-comfy:ikon
     container_name: dek-comfyui-worker
